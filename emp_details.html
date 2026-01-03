@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dayflow - Employees Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="emp_details.css">
+</head>
+<body>
+    <div class="toast" id="toast"><span id="toastMessage"></span></div>
+    <nav class="top-nav">
+        <div class="logo"><span>⚡</span><span>Dayflow</span></div>
+        <div class="nav-tabs">
+            <button class="nav-tab active">Employees</button>
+            <button class="nav-tab">Attendance</button>
+            <button class="nav-tab">Time Off</button>
+        </div>
+        <div class="nav-right">
+            <div class="avatar" id="userAvatar">JD</div>
+            <div class="dropdown" id="dropdown">
+                <div class="dropdown-item" onclick="openMyProfile()">👤 My Profile</div>
+                <div class="dropdown-item" onclick="logout()">🚪 Log Out</div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="header-section">
+            <div class="header-left">
+                <h1 class="page-title">Employees</h1>
+                <input type="text" class="search-bar" id="searchBar" placeholder="Search employees by name...">
+            </div>
+            <div class="header-right">
+                <div class="attendance-status" id="attendanceStatus">
+                    <span class="status-text">You are offline</span>
+                    <button class="btn btn-success" onclick="checkIn()">Check In</button>
+                </div>
+                <button class="btn btn-primary" id="newEmployeeBtn" onclick="openAddEmployeeForm()">+ NEW</button>
+            </div>
+        </div>
+        <div class="employee-grid" id="employeeGrid"></div>
+    </div>
+    <div class="modal" id="profileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Employee Profile</h2>
+                <button class="close-btn" onclick="closeModal('profileModal')">&times;</button>
+            </div>
+            <div class="modal-body"><div class="profile-section" id="profileContent"></div></div>
+        </div>
+    </div>
+    <div class="modal" id="addEmployeeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add New Employee</h2>
+                <button class="close-btn" onclick="closeAddEmployeeForm()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addEmployeeForm" onsubmit="handleAddEmployee(event)">
+                    <div class="profile-section">
+                        <div class="form-group">
+                            <label class="form-label required">Full Name</label>
+                            <input type="text" class="form-input" id="empName" required>
+                            <span class="form-error" id="empNameError">Name is required</span>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label required">Email</label>
+                                <input type="email" class="form-input" id="empEmail" required>
+                                <span class="form-error" id="empEmailError">Email must be unique</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Employee ID</label>
+                                <input type="text" class="form-input" id="empId" required>
+                                <span class="form-error" id="empIdError">Employee ID must be unique</span>
+                            </div>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label required">Role</label>
+                                <select class="form-select" id="empRole" required>
+                                    <option value="">Select Role</option>
+                                    <option value="Employee">Employee</option>
+                                    <option value="Manager">Manager</option>
+                                    <option value="HR">HR</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Department</label>
+                                <select class="form-select" id="empDepartment" required>
+                                    <option value="">Select Department</option>
+                                    <option value="Engineering">Engineering</option>
+                                    <option value="Product">Product</option>
+                                    <option value="Design">Design</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Sales">Sales</option>
+                                    <option value="Human Resources">Human Resources</option>
+                                    <option value="Finance">Finance</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-input" id="empPhone">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Date of Joining</label>
+                                <input type="date" class="form-input" id="empJoinDate" required>
+                            </div>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label required">Work Location</label>
+                                <select class="form-select" id="empLocation" required>
+                                    <option value="">Select Location</option>
+                                    <option value="Office">Office</option>
+                                    <option value="Remote">Remote</option>
+                                    <option value="Hybrid">Hybrid</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label required">Status</label>
+                                <select class="form-select" id="empStatus" required>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Reporting Manager</label>
+                            <select class="form-select" id="empManager"></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Notes / Remarks</label>
+                            <textarea class="form-input" id="empNotes" rows="3"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeAddEmployeeForm()">Cancel</button>
+                <button type="submit" form="addEmployeeForm" class="btn btn-primary" id="submitBtn">Add Employee</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+    <script src="emp_details.js"></script>
+</body>
+</html>
