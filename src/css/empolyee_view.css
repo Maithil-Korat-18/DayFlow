@@ -58,6 +58,80 @@
             font-size: 14px;
         }
 
+        /* Profile Icon and Dropdown */
+        .profile-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #6E56CF; /* Primary color from palette */
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            line-height: 40px;
+            user-select: none;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 6px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            text-decoration: none;
+            color: #2A2A4A; /* Foreground color from palette */
+            background-color: white;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-item:hover {
+            background-color: #E4DFFF; /* Secondary color from palette */
+            color: #4A4080; /* Secondary foreground from palette */
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item.logout {
+            color: #e74c3c; /* Red for logout */
+        }
+
+        .dropdown-item.logout:hover {
+            background-color: #fadbd8; /* Light red background */
+            color: #c0392b; /* Darker red on hover */
+        }
+
         .container {
             max-width: 1400px;
             margin: 40px auto;

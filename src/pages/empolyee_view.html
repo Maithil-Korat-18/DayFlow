@@ -17,7 +17,13 @@
             <a href="Leave.html" class="nav-link">Time Off</a>
         </div>
         <div class="nav-right">
-            <span class="user-name">John Smith</span>
+            <div class="profile-container">
+                <div class="profile-icon" id="profileIcon">JS</div>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="../pages/my-profile.html" class="dropdown-item">Profile</a>
+                    <a href="../../index.html" class="dropdown-item logout" id="logoutLink">Log Out</a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -65,5 +71,37 @@
     </div>
 
     <script src="../js/empolyee_view.js"></script>
+    <script>
+        // Profile dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileIcon = document.getElementById('profileIcon');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            const logoutLink = document.getElementById('logoutLink');
+
+            // Toggle dropdown
+            profileIcon.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdownMenu.classList.toggle('show');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!profileIcon.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                    dropdownMenu.classList.remove('show');
+                }
+            });
+
+            // Logout functionality
+            logoutLink.addEventListener('click', function(e) {
+                // Clear any stored user data/session
+                localStorage.clear();
+                sessionStorage.clear();
+                
+                // Remove any authentication tokens/cookies if they exist
+                // This would depend on how the app stores auth state
+                document.cookie = "auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            });
+        });
+    </script>
 </body>
 </html>

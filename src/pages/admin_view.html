@@ -5,6 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Attendance View</title>
     <link rel="stylesheet" href="../css/admin_view.css">
+    <style>
+        /* Profile dropdown styles */
+        .profile-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #6E56CF; /* Primary color */
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            color: #2A2A4A; /* Foreground color */
+            transition: background-color 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background-color: #E4DFFF; /* Secondary color */
+        }
+
+        .dropdown-item.logout {
+            color: #e74c3c; /* Red for logout */
+            border-top: 1px solid #eee;
+        }
+
+        .dropdown-item.logout:hover {
+            background-color: #fdeded;
+        }
+    </style>
 </head>
 <body>
     <div class="navbar">
@@ -21,6 +85,13 @@
         </div>
         <div class="nav-right">
             <span class="user-name">Admin User</span>
+            <div class="profile-container">
+                <div class="profile-icon" id="profileIcon">AU</div>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="../pages/dashboard.html" class="dropdown-item">Profile</a>
+                    <a href="../../index.html" class="dropdown-item logout" id="logoutLink">Log Out</a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -60,6 +131,38 @@
         </div>
     </div>
 
-    <script src="../js/admin_view.js"></script>
+    <script>
+        // Profile dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileIcon = document.getElementById('profileIcon');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            const logoutLink = document.getElementById('logoutLink');
+
+            // Toggle dropdown
+            profileIcon.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdownMenu.classList.toggle('show');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!profileIcon.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                    dropdownMenu.classList.remove('show');
+                }
+            });
+
+            // Logout functionality
+            logoutLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Clear any stored authentication data
+                localStorage.clear();
+                sessionStorage.clear();
+                
+                // Redirect to login page
+                window.location.href = this.href;
+            });
+        });
+    </script>
 </body>
 </html>
