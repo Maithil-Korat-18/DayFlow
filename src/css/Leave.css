@@ -6,14 +6,14 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: #f9fafb;
-            color: #111827;
+            background-color: #F5F5FF; /* Background color from palette */
+            color: #2A2A4A; /* Foreground color from palette */
         }
 
         /* Navigation */
         .navbar {
-            background: white;
-            border-bottom: 1px solid #e5e7eb;
+            background: #6E56CF; /* Primary color from palette */
+            border-bottom: 1px solid #E4DFFF; /* Secondary color from palette */
             padding: 0 24px;
         }
 
@@ -35,7 +35,7 @@
         .logo {
             font-size: 24px;
             font-weight: bold;
-            color: #2563eb;
+            color: #FFFFFF; /* Primary foreground from palette */
         }
 
         .nav-tabs {
@@ -51,16 +51,16 @@
             transition: all 0.2s;
             border: none;
             background: none;
-            color: #6b7280;
+            color: #E4DFFF; /* Secondary color from palette */
         }
 
         .nav-tab.active {
-            background: #eff6ff;
-            color: #2563eb;
+            background: #E4DFFF; /* Secondary color from palette */
+            color: #4A4080; /* Secondary foreground from palette */
         }
 
         .nav-tab:hover:not(.active) {
-            background: #f9fafb;
+            background: #D8E6FF; /* Accent color from palette */
         }
 
         .user-info {
@@ -76,12 +76,12 @@
         .user-name {
             font-size: 14px;
             font-weight: 500;
-            color: #111827;
+            color: #2A2A4A; /* Foreground color from palette */
         }
 
         .user-role {
             font-size: 12px;
-            color: #6b7280;
+            color: #4A4080; /* Secondary foreground from palette */
             text-transform: capitalize;
         }
 
@@ -89,8 +89,8 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: #2563eb;
-            color: white;
+            background: #6E56CF; /* Primary color from palette */
+            color: #FFFFFF; /* Primary foreground from palette */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -123,15 +123,15 @@
         }
 
         .balance-card.pto {
-            background: #eff6ff;
-            border-color: #bfdbfe;
-            color: #1e40af;
+            background: #D8E6FF; /* Accent color from palette */
+            border-color: #6E56CF; /* Primary color from palette */
+            color: #2A2A4A; /* Foreground color from palette */
         }
 
         .balance-card.sick {
-            background: #f0fdf4;
-            border-color: #bbf7d0;
-            color: #15803d;
+            background: #D8E6FF; /* Accent color from palette */
+            border-color: #6E56CF; /* Primary color from palette */
+            color: #2A2A4A; /* Foreground color from palette */
         }
 
         .balance-info h3 {
@@ -174,12 +174,12 @@
 
         .page-title p {
             font-size: 14px;
-            color: #6b7280;
+            color: #4A4080; /* Secondary foreground from palette */
         }
 
         .btn-new {
-            background: #2563eb;
-            color: white;
+            background: #6E56CF; /* Primary color from palette */
+            color: #FFFFFF; /* Primary foreground from palette */
             padding: 10px 20px;
             border-radius: 8px;
             font-weight: 500;
@@ -189,15 +189,16 @@
         }
 
         .btn-new:hover {
-            background: #1d4ed8;
+            background: #4A4080; /* Secondary foreground from palette */
         }
 
         /* Table */
         .table-container {
-            background: white;
-            border: 1px solid #e5e7eb;
+            background: #FFFFFF; /* White background for contrast */
+            border: 1px solid #E4DFFF; /* Secondary color from palette */
             border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         table {
@@ -206,8 +207,8 @@
         }
 
         thead {
-            background: #f9fafb;
-            border-bottom: 1px solid #e5e7eb;
+            background: #E4DFFF; /* Secondary color from palette */
+            border-bottom: 1px solid #6E56CF; /* Primary color from palette */
         }
 
         th {
@@ -215,14 +216,14 @@
             text-align: left;
             font-size: 12px;
             font-weight: 600;
-            color: #6b7280;
+            color: #2A2A4A; /* Foreground color from palette */
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
         td {
             padding: 16px 24px;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid #E4DFFF; /* Secondary color from palette */
             font-size: 14px;
         }
 
@@ -231,12 +232,12 @@
         }
 
         tbody tr:hover {
-            background: #f9fafb;
+            background: #E4DFFF; /* Secondary color from palette */
         }
 
         .employee-name {
             font-weight: 500;
-            color: #111827;
+            color: #2A2A4A; /* Foreground color from palette */
         }
 
         .status-badge {
@@ -250,21 +251,18 @@
         }
 
         .status-badge.pending {
-            background: #fef3c7;
-            color: #92400e;
-            border-color: #fde68a;
+            background: #e8eb55; /* Accent color from palette */
+            color: #2A2A4A; /* Accent foreground from palette */
         }
 
         .status-badge.approved {
-            background: #d1fae5;
-            color: #065f46;
-            border-color: #a7f3d0;
+            background: #8cff86; /* Accent color from palette */
+            color: #2A2A4A; /* Accent foreground from palette */
         }
 
         .status-badge.rejected {
-            background: #fee2e2;
-            color: #991b1b;
-            border-color: #fecaca;
+            background: #fc7272; /* Accent color from palette */
+            color: #2A2A4A; /* Accent foreground from palette */
         }
 
         .actions {
@@ -284,21 +282,21 @@
         }
 
         .btn-approve {
-            color: #16a34a;
+            color: #6E56CF; /* Primary color from palette */
             background: transparent;
         }
 
         .btn-approve:hover {
-            background: #f0fdf4;
+            background: #E4DFFF; /* Secondary color from palette */
         }
 
         .btn-reject {
-            color: #dc2626;
+            color: #6E56CF; /* Primary color from palette */
             background: transparent;
         }
 
         .btn-reject:hover {
-            background: #fef2f2;
+            background: #E4DFFF; /* Secondary color from palette */
         }
 
         /* Modal */
@@ -318,7 +316,7 @@
         }
 
         .modal {
-            background: white;
+            background: #FFFFFF; /* White background */
             border-radius: 12px;
             width: 100%;
             max-width: 600px;
@@ -332,18 +330,19 @@
             justify-content: space-between;
             align-items: center;
             padding: 24px;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid #E4DFFF; /* Secondary color from palette */
         }
 
         .modal-header h2 {
             font-size: 20px;
             font-weight: bold;
+            color: #2A2A4A; /* Foreground color from palette */
         }
 
         .btn-close {
             background: none;
             border: none;
-            color: #9ca3af;
+            color: #4A4080; /* Secondary foreground from palette */
             cursor: pointer;
             font-size: 24px;
             line-height: 1;
@@ -351,7 +350,7 @@
         }
 
         .btn-close:hover {
-            color: #6b7280;
+            color: #2A2A4A; /* Foreground color from palette */
         }
 
         .modal-body {
@@ -366,28 +365,30 @@
             display: block;
             font-size: 14px;
             font-weight: 500;
-            color: #374151;
+            color: #2A2A4A; /* Foreground color from palette */
             margin-bottom: 8px;
         }
 
         .form-input, .form-select {
             width: 100%;
             padding: 10px 16px;
-            border: 1px solid #d1d5db;
+            border: 1px solid #E4DFFF; /* Secondary color from palette */
             border-radius: 8px;
             font-size: 14px;
             transition: all 0.2s;
+            background: #FFFFFF; /* White background */
+            color: #2A2A4A; /* Foreground color from palette */
         }
 
         .form-input:focus, .form-select:focus {
             outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            border-color: #6E56CF; /* Primary color from palette */
+            box-shadow: 0 0 0 3px rgba(110, 86, 207, 0.1); /* Primary color with opacity */
         }
 
         .form-input:disabled {
-            background: #f9fafb;
-            color: #6b7280;
+            background: #F5F5FF; /* Background color from palette */
+            color: #4A4080; /* Secondary foreground from palette */
         }
 
         .form-row {
@@ -401,14 +402,14 @@
             align-items: center;
             justify-content: center;
             padding: 12px 16px;
-            border: 2px dashed #d1d5db;
+            border: 2px dashed #E4DFFF; /* Secondary color from palette */
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s;
         }
 
         .file-upload:hover {
-            border-color: #2563eb;
+            border-color: #6E56CF; /* Primary color from palette */
         }
 
         .file-upload input {
@@ -417,17 +418,17 @@
 
         .file-upload span {
             font-size: 14px;
-            color: #6b7280;
+            color: #4A4080; /* Secondary foreground from palette */
         }
 
         .error-message {
-            color: #dc2626;
+            color: #6E56CF; /* Primary color from palette */
             font-size: 12px;
             margin-top: 4px;
         }
 
         .input-error {
-            border-color: #dc2626;
+            border-color: #6E56CF; /* Primary color from palette */
         }
 
         .modal-footer {
@@ -435,13 +436,14 @@
             justify-content: flex-end;
             gap: 12px;
             padding-top: 16px;
+            border-top: 1px solid #E4DFFF; /* Secondary color from palette */
         }
 
         .btn-secondary {
             padding: 10px 20px;
-            border: 1px solid #d1d5db;
-            background: white;
-            color: #374151;
+            border: 1px solid #6E56CF; /* Primary color from palette */
+            background: #E4DFFF; /* Secondary color from palette */
+            color: #4A4080; /* Secondary foreground from palette */
             border-radius: 8px;
             font-weight: 500;
             cursor: pointer;
@@ -449,13 +451,14 @@
         }
 
         .btn-secondary:hover {
-            background: #f9fafb;
+            background: #6E56CF; /* Primary color from palette */
+            color: #FFFFFF; /* Primary foreground from palette */
         }
 
         .btn-primary {
             padding: 10px 20px;
-            background: #2563eb;
-            color: white;
+            background: #6E56CF; /* Primary color from palette */
+            color: #FFFFFF; /* Primary foreground from palette */
             border: none;
             border-radius: 8px;
             font-weight: 500;
@@ -464,13 +467,13 @@
         }
 
         .btn-primary:hover {
-            background: #1d4ed8;
+            background: #4A4080; /* Secondary foreground from palette */
         }
 
         .empty-state {
             text-align: center;
             padding: 48px 24px;
-            color: #6b7280;
+            color: #4A4080; /* Secondary foreground from palette */
         }
 
         .empty-state svg {
