@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Attendance View</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: #242424;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #333;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav-left .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a9eff;
+            letter-spacing: 2px;
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-link {
+            color: #b0b0b0;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+            background-color: #333;
+        }
+
+        .nav-link.active {
+            color: #ffffff;
+            background-color: #4a9eff;
+        }
+
+        .nav-right .user-name {
+            color: #e0e0e0;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 40px;
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .controls-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            background-color: #2a2a2a;
+            border: 1px solid #404040;
+            border-radius: 6px;
+            color: #e0e0e0;
+            font-size: 14px;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #4a9eff;
+        }
+
+        .date-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .date-controls input[type="date"] {
+            padding: 10px 15px;
+            background-color: #2a2a2a;
+            border: 1px solid #404040;
+            border-radius: 6px;
+            color: #e0e0e0;
+            font-size: 14px;
+        }
+
+        .date-controls input[type="date"]:focus {
+            outline: none;
+            border-color: #4a9eff;
+        }
+
+        .day-label {
+            font-size: 16px;
+            font-weight: 500;
+            color: #4a9eff;
+            min-width: 100px;
+        }
+
+        .btn-nav {
+            background-color: #2a2a2a;
+            border: 1px solid #404040;
+            color: #e0e0e0;
+            padding: 10px 18px;
+            font-size: 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-nav:hover {
+            background-color: #4a9eff;
+            border-color: #4a9eff;
+        }
+
+        .attendance-table {
+            background-color: #242424;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #333;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        thead {
+            background-color: #2a2a2a;
+        }
+
+        thead th {
+            padding: 18px 20px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #404040;
+        }
+
+        tbody td {
+            padding: 16px 20px;
+            font-size: 14px;
+            color: #e0e0e0;
+            border-bottom: 1px solid #333;
+        }
+
+        tbody tr:hover {
+            background-color: #2a2a2a;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .absent-row {
+            opacity: 0.5;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px 20px;
+            color: #808080;
+            font-style: italic;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .controls-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px 20px;
+            }
+
+            .nav-center {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-left">
+            <div class="logo">COMPANY</div>
+        </div>
+        <div class="nav-center">
+            <a href="#" class="nav-link">Employees</a>
+            <a href="admin-view.html" class="nav-link active">Attendance</a>
+            <a href="#" class="nav-link">Time Off</a>
+        </div>
+        <div class="nav-right">
+            <span class="user-name">Admin User</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Attendance Management</h1>
+        </div>
+
+        <div class="controls-bar">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search employees...">
+            </div>
+
+            <div class="date-controls">
+                <button class="btn-nav" id="prevDay">←</button>
+                <input type="date" id="dateSelector">
+                <span class="day-label" id="dayLabel">Monday</span>
+                <button class="btn-nav" id="nextDay">→</button>
+            </div>
+        </div>
+
+        <div class="attendance-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Employee Name</th>
+                        <th>Check-In</th>
+                        <th>Check-Out</th>
+                        <th>Work Hours</th>
+                        <th>Extra Hours</th>
+                    </tr>
+                </thead>
+                <tbody id="attendanceTableBody">
+                    <!-- Data will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Sample attendance data
+        const attendanceData = {
+            '2026-01-03': [
+                { name: 'John Smith', checkIn: '09:00', checkOut: '18:30', workHours: 9.5, extraHours: 1.5 },
+                { name: 'Sarah Johnson', checkIn: '08:45', checkOut: '17:15', workHours: 8.5, extraHours: 0.5 },
+                { name: 'Michael Brown', checkIn: '09:15', checkOut: '18:00', workHours: 8.75, extraHours: 0.75 },
+                { name: 'Emily Davis', checkIn: '09:00', checkOut: '17:00', workHours: 8.0, extraHours: 0.0 },
+                { name: 'Robert Wilson', checkIn: '--:--', checkOut: '--:--', workHours: 0.0, extraHours: 0.0, absent: true }
+            ],
+            '2026-01-02': [
+                { name: 'John Smith', checkIn: '09:00', checkOut: '18:00', workHours: 9.0, extraHours: 1.0 },
+                { name: 'Sarah Johnson', checkIn: '08:30', checkOut: '17:30', workHours: 9.0, extraHours: 1.0 },
+                { name: 'Michael Brown', checkIn: '09:00', checkOut: '17:45', workHours: 8.75, extraHours: 0.75 },
+                { name: 'Emily Davis', checkIn: '--:--', checkOut: '--:--', workHours: 0.0, extraHours: 0.0, absent: true },
+                { name: 'Robert Wilson', checkIn: '09:30', checkOut: '18:30', workHours: 9.0, extraHours: 1.0 }
+            ]
+        };
+
+        const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+        // Initialize with today's date
+        const dateSelector = document.getElementById('dateSelector');
+        const today = new Date();
+        dateSelector.value = formatDate(today);
+
+        // Load initial data
+        loadAttendanceData();
+
+        // Event listeners
+        document.getElementById('prevDay').addEventListener('click', () => {
+            const currentDate = new Date(dateSelector.value);
+            currentDate.setDate(currentDate.getDate() - 1);
+            dateSelector.value = formatDate(currentDate);
+            loadAttendanceData();
+        });
+
+        document.getElementById('nextDay').addEventListener('click', () => {
+            const currentDate = new Date(dateSelector.value);
+            currentDate.setDate(currentDate.getDate() + 1);
+            dateSelector.value = formatDate(currentDate);
+            loadAttendanceData();
+        });
+
+        dateSelector.addEventListener('change', loadAttendanceData);
+
+        document.getElementById('searchInput').addEventListener('input', function() {
+            filterTable(this.value);
+        });
+
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        function loadAttendanceData() {
+            const selectedDate = dateSelector.value;
+            const date = new Date(selectedDate);
+            const dayName = dayNames[date.getDay()];
+            document.getElementById('dayLabel').textContent = dayName;
+
+            const data = attendanceData[selectedDate] || [];
+            const tbody = document.getElementById('attendanceTableBody');
+
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="no-data">No attendance records found for this date</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = data.map(record => `
+                <tr class="${record.absent ? 'absent-row' : ''}">
+                    <td>${record.name}</td>
+                    <td>${record.checkIn}</td>
+                    <td>${record.checkOut}</td>
+                    <td>${record.workHours.toFixed(2)} hrs</td>
+                    <td>${record.extraHours.toFixed(2)} hrs</td>
+                </tr>
+            `).join('');
+        }
+
+        function filterTable(searchTerm) {
+            const rows = document.querySelectorAll('#attendanceTableBody tr');
+            const lowerSearch = searchTerm.toLowerCase();
+
+            rows.forEach(row => {
+                const name = row.cells[0]?.textContent.toLowerCase() || '';
+                if (name.includes(lowerSearch)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
