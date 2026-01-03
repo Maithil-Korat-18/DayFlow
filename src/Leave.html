@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dayflow - Time Off Module</title>
+    <Link rel="stylesheet" href="Leave.css" ></Link>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-left">
+                <div class="logo">Dayflow</div>
+                <div class="nav-tabs">
+                    <button class="nav-tab">Employees</button>
+                    <button class="nav-tab">Attendance</button>
+                    <button class="nav-tab active">Time Off</button>
+                </div>
+            </div>
+            <div class="user-info">
+                <div class="user-details">
+                    <div class="user-name" id="userName">John Smith</div>
+                    <div class="user-role" id="userRole">Employee</div>
+                </div>
+                <div class="user-avatar" id="userAvatar">JS</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Balance Cards (Employee Only) -->
+        <div id="balanceCards" class="balance-cards">
+            <div class="balance-card pto">
+                <div class="balance-info">
+                    <h3>Paid Time Off</h3>
+                    <div class="days"><span id="ptoBalance">24</span> Days</div>
+                    <div class="label">Available</div>
+                </div>
+                <div class="balance-icon">📅</div>
+            </div>
+            <div class="balance-card sick">
+                <div class="balance-info">
+                    <h3>Sick Time Off</h3>
+                    <div class="days"><span id="sickBalance">7</span> Days</div>
+                    <div class="label">Available</div>
+                </div>
+                <div class="balance-icon">🏥</div>
+            </div>
+        </div>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="page-title">
+                <h1 id="pageTitle">My Time Off Requests</h1>
+                <p id="pageSubtitle">View and manage your time off</p>
+            </div>
+            <button class="btn-new" id="btnNewRequest">+ New Request</button>
+        </div>
+
+        <!-- Time Off Table -->
+        <div class="table-container">
+            <table id="timeOffTable">
+                <thead>
+                    <tr id="tableHeader">
+                        <!-- Dynamic headers will be inserted here -->
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Dynamic rows will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- New Request Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>New Time Off Request</h2>
+                <button class="btn-close" id="btnCloseModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Employee</label>
+                    <input type="text" class="form-input" id="modalEmployee" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Time Off Type *</label>
+                    <select class="form-select" id="modalType">
+                        <option value="Paid Time Off">Paid Time Off</option>
+                        <option value="Sick Leave">Sick Leave</option>
+                        <option value="Unpaid Leave">Unpaid Leave</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Start Date *</label>
+                        <input type="date" class="form-input" id="modalStartDate">
+                        <div class="error-message hidden" id="errorStartDate"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">End Date *</label>
+                        <input type="date" class="form-input" id="modalEndDate">
+                        <div class="error-message hidden" id="errorEndDate"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Number of Days</label>
+                    <input type="number" class="form-input" id="modalDays" value="0" readonly>
+                    <div class="error-message hidden" id="errorDays"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" id="attachmentLabel">Attachment</label>
+                    <label class="file-upload" for="modalAttachment">
+                        <span id="fileName">📎 Choose file...</span>
+                    </label>
+                    <input type="file" id="modalAttachment">
+                    <div class="error-message hidden" id="errorAttachment"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn-secondary" id="btnDiscard">Discard</button>
+                    <button class="btn-primary" id="btnSubmit">Submit Request</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="Leave.js"></script>
+</body>
+</html>

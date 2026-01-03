@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dayflow - My Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="toast" id="toast"><span id="toastMessage"></span></div>
+    
+    <nav class="top-nav">
+        <div class="logo"><span>⚡</span><span>Dayflow</span></div>
+        <div class="nav-tabs">
+            <button class="nav-tab" onclick="goToEmployees()">Employees</button>
+            <a href="Leave.html"><button class="nav-tab" >Attendance</button></a>
+            
+            <button class="nav-tab">Time Off</button>
+        </div>
+        <div class="nav-right">
+            <div class="avatar" id="userAvatar">JD</div>
+            <div class="dropdown" id="dropdown">
+                <div class="dropdown-item active">👤 My Profile</div>
+                <div class="dropdown-item" onclick="logout()">🚪 Log Out</div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">My Profile</h1>
+        </div>
+
+        <div class="profile-header">
+            <div class="profile-avatar-section">
+                <div class="profile-avatar-large" id="profileAvatar" onclick="triggerFileUpload()">
+                    JD
+                    <div class="avatar-edit-icon">📷</div>
+                </div>
+                <input type="file" id="avatarUpload" accept="image/*" style="display: none;" onchange="handleAvatarUpload(event)">
+            </div>
+
+            <div class="profile-info">
+                <div class="info-field">
+                    <label class="info-label">Full Name</label>
+                    <input type="text" class="info-input" id="fullName" value="John Doe">
+                </div>
+                <div class="info-field">
+                    <label class="info-label">Job Position</label>
+                    <input type="text" class="info-input" id="jobPosition" value="HR Manager">
+                </div>
+                <div class="info-field">
+                    <label class="info-label">Company</label>
+                    <input type="text" class="info-input" id="company" value="Dayflow Technologies">
+                </div>
+                <div class="info-field">
+                    <label class="info-label">Department</label>
+                    <input type="text" class="info-input" id="department" value="Human Resources">
+                </div>
+                <div class="info-field">
+                    <label class="info-label">Manager</label>
+                    <input type="text" class="info-input" id="manager" value="Sarah Williams">
+                </div>
+                <div class="info-field">
+                    <label class="info-label">Email</label>
+                    <input type="email" class="info-input" id="email" value="john.doe@dayflow.com">
+                </div>
+                <div class="info-field">
+                    <label class="info-label">Mobile Number</label>
+                    <input type="tel" class="info-input" id="mobile" value="+1 (555) 100-0001">
+                </div>
+                <div class="info-field">
+                    <label class="info-label">Location</label>
+                    <input type="text" class="info-input" id="location" value="New York, USA">
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-tabs-nav">
+            <button class="profile-tab active" onclick="switchTab('resume')">Resume</button>
+            <button class="profile-tab" onclick="switchTab('private')">Private Info</button>
+            <div id="salaryTabContainer">
+                <button class="profile-tab" onclick="switchTab('salary')">Salary Info</button>
+            </div>
+            <button class="profile-tab" onclick="switchTab('security')">Security</button>
+        </div>
+
+        <!-- Resume Tab -->
+        <div class="tab-content active" id="resumeTab">
+            <div class="tab-panel">
+                <div class="form-section">
+                    <h3 class="form-section-title">Resume</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                        <!-- Left Column: Text Sections -->
+                        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                            <div class="form-group">
+                                <label class="form-label">About</label>
+                                <textarea class="form-input" id="aboutText" rows="4" placeholder="Tell us about yourself, your background, and your professional journey...">I am an experienced HR Manager with over 5 years in human resources management. I specialize in employee relations, recruitment, and organizational development. I enjoy working with people and helping them reach their potential.</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">What I love about my job</label>
+                                <textarea class="form-input" id="jobPassionText" rows="3" placeholder="Describe what motivates you about your role...">I love helping employees grow in their careers and seeing them succeed. Building a positive workplace culture and resolving conflicts to maintain a harmonious work environment brings me satisfaction.</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">My interests and hobbies</label>
+                                <textarea class="form-input" id="hobbiesText" rows="3" placeholder="Share your personal interests outside of work...">In my free time, I enjoy reading leadership books, hiking, photography, and volunteering at local community events. I also practice yoga and meditation to maintain work-life balance.</textarea>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Skills & Certifications -->
+                        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                            <!-- Skills Section -->
+                            <div class="form-group">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                    <label class="form-label">Skills</label>
+                                    <button type="button" class="btn btn-secondary" onclick="addSkill()" style="padding: 0.25rem 0.75rem; font-size: 0.85rem;">+ Add Skill</button>
+                                </div>
+                                <div id="skillsContainer">
+                                    <div class="skill-tag" style="display: inline-block; background: #3b82f6; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; margin: 0.25rem; position: relative;">
+                                        <span>Leadership</span>
+                                        <button type="button" onclick="removeSkill(this)" style="background: none; border: none; color: white; margin-left: 0.5rem; cursor: pointer; font-size: 1.2rem;">×</button>
+                                    </div>
+                                    <div class="skill-tag" style="display: inline-block; background: #3b82f6; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; margin: 0.25rem; position: relative;">
+                                        <span>Communication</span>
+                                        <button type="button" onclick="removeSkill(this)" style="background: none; border: none; color: white; margin-left: 0.5rem; cursor: pointer; font-size: 1.2rem;">×</button>
+                                    </div>
+                                    <div class="skill-tag" style="display: inline-block; background: #3b82f6; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; margin: 0.25rem; position: relative;">
+                                        <span>HR Management</span>
+                                        <button type="button" onclick="removeSkill(this)" style="background: none; border: none; color: white; margin-left: 0.5rem; cursor: pointer; font-size: 1.2rem;">×</button>
+                                    </div>
+                                    <div class="skill-tag" style="display: inline-block; background: #3b82f6; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; margin: 0.25rem; position: relative;">
+                                        <span>Team Building</span>
+                                        <button type="button" onclick="removeSkill(this)" style="background: none; border: none; color: white; margin-left: 0.5rem; cursor: pointer; font-size: 1.2rem;">×</button>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-input" id="newSkillInput" placeholder="Type a skill and press Enter to add..." style="margin-top: 0.75rem; width: 100%;">
+                            </div>
+
+                            <!-- Certification Section -->
+                            <div class="form-group">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                    <label class="form-label">Certification</label>
+                                    <button type="button" class="btn btn-secondary" onclick="addCertification()" style="padding: 0.25rem 0.75rem; font-size: 0.85rem;">+ Add Certification</button>
+                                </div>
+                                <div id="certificationsContainer">
+                                    <div class="certification-item" style="background: #0f1419; border: 1px solid #2d333b; border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; position: relative;">
+                                        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                                            <div>
+                                                <div style="font-weight: 600; margin-bottom: 0.25rem;">Professional HR Management Certificate</div>
+                                                <div style="font-size: 0.9rem; color: #8b92a0;">Issuing Authority: Society for Human Resource Management</div>
+                                                <div style="font-size: 0.9rem; color: #8b92a0;">Year: 2023</div>
+                                            </div>
+                                            <div style="display: flex; gap: 0.5rem;">
+                                                <button type="button" onclick="editCertification(this)" style="background: #2d333b; border: none; color: #e4e6eb; border-radius: 4px; padding: 0.25rem 0.5rem; cursor: pointer;">Edit</button>
+                                                <button type="button" onclick="removeCertification(this)" style="background: #ef4444; border: none; color: white; border-radius: 4px; padding: 0.25rem 0.5rem; cursor: pointer;">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="cancelChanges('resume')">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveChanges('resume')">Save Changes</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Private Info Tab -->
+        <div class="tab-content" id="privateTab">
+            <div class="tab-panel">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                    <!-- Left Column: Personal Information -->
+                    <div class="form-section" style="margin-bottom: 0;">
+                        <h3 class="form-section-title">Personal Information</h3>
+                        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                            <div class="form-group">
+                                <label class="form-label">Date of Birth</label>
+                                <input type="date" class="form-input" id="dob" value="1990-05-15">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Residing Address</label>
+                                <textarea class="form-input" id="address" rows="3">123 Main Street, Apt 4B, New York, NY 10001</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Nationality</label>
+                                <input type="text" class="form-input" id="nationality" value="American">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Personal Email</label>
+                                <input type="email" class="form-input" id="personalEmail" value="john.personal@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Gender</label>
+                                <select class="form-select" id="gender">
+                                    <option value="Male" selected>Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                    <option value="Prefer not to say">Prefer not to say</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Marital Status</label>
+                                <select class="form-select" id="maritalStatus">
+                                    <option value="Single" selected>Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Divorced">Divorced</option>
+                                    <option value="Widowed">Widowed</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Date of Joining</label>
+                                <input type="date" class="form-input" id="joinDate" value="2023-01-15" disabled>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Bank Details -->
+                    <div class="form-section" style="margin-bottom: 0;">
+                        <h3 class="form-section-title">Bank Details</h3>
+                        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                            <div class="form-group">
+                                <label class="form-label">Account Number</label>
+                                <div style="position: relative;">
+                                    <input type="text" class="form-input" id="accountNumber" value="1234567890123456" data-masked="••••••••••••3456" style="padding-right: 3rem;">
+                                    <button type="button" onclick="toggleMask('accountNumber')" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: #3b82f6; cursor: pointer; font-size: 1.2rem;">👁️</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Bank Name</label>
+                                <input type="text" class="form-input" id="bankName" value="Chase Bank">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">IFSC Code</label>
+                                <input type="text" class="form-input" id="ifscCode" value="CHAS0001234" maxlength="11">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">PAN Number</label>
+                                <div style="position: relative;">
+                                    <input type="text" class="form-input" id="panNumber" value="ABCDE1234F" data-masked="•••••••34F" maxlength="10" style="padding-right: 3rem;">
+                                    <button type="button" onclick="toggleMask('panNumber')" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: #3b82f6; cursor: pointer; font-size: 1.2rem;">👁️</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">UAN Number</label>
+                                <div style="position: relative;">
+                                    <input type="text" class="form-input" id="uanNumber" value="123456789012" data-masked="••••••••9012" maxlength="12" style="padding-right: 3rem;">
+                                    <button type="button" onclick="toggleMask('uanNumber')" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: #3b82f6; cursor: pointer; font-size: 1.2rem;">👁️</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Employee Code</label>
+                                <input type="text" class="form-input" id="empCode" value="EMP001" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="cancelChanges('private')">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveChanges('private')">Save Changes</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Salary Info Tab -->
+        <div class="tab-content" id="salaryTab">
+            <div class="tab-panel">
+                <div class="form-section">
+                    <h3 class="form-section-title">Salary Information</h3>
+                    
+                    <!-- SECTION 1: WAGE SUMMARY -->
+                    <div class="form-section" style="margin-bottom: 2rem;">
+                        <h3 class="form-section-title" style="font-size: 1.1rem; border-bottom: 1px solid #2d333b; padding-bottom: 0.75rem; margin-bottom: 1.5rem;">Wage Summary</h3>
+                        <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                            <div class="form-group">
+                                <label class="form-label">Monthly Wage (₹ / month)</label>
+                                <input type="number" class="form-input" id="monthlyWage" value="75000" onchange="calculateYearlyWage()" style="font-weight: 600;">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Yearly Wage (₹ / year)</label>
+                                <input type="number" class="form-input" id="yearlyWage" value="900000" readonly style="background: #2d333b; font-weight: 600;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- SECTION 2: WORK CONDITIONS -->
+                    <div class="form-section" style="margin-bottom: 2rem;">
+                        <h3 class="form-section-title" style="font-size: 1.1rem; border-bottom: 1px solid #2d333b; padding-bottom: 0.75rem; margin-bottom: 1.5rem;">Work Conditions</h3>
+                        <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                            <div class="form-group">
+                                <label class="form-label">No. of working days in a week</label>
+                                <input type="number" class="form-input" id="workingDaysPerWeek" value="5" min="1" max="7">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Break Time (hours)</label>
+                                <input type="number" class="form-input" id="breakTime" value="1" min="0" max="4" step="0.5">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- SECTION 3: SALARY COMPONENTS -->
+                    <div class="form-section" style="margin-bottom: 2rem;">
+                        <h3 class="form-section-title" style="font-size: 1.1rem; border-bottom: 1px solid #2d333b; padding-bottom: 0.75rem; margin-bottom: 1.5rem;">Salary Components</h3>
+                        <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                            <div class="form-group">
+                                <label class="form-label">Basic Salary</label>
+                                <input type="number" class="form-input" id="basicSalary" value="45000" onchange="calculateAll()" style="font-weight: 600;">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">House Rent Allowance (HRA)</label>
+                                <input type="number" class="form-input" id="hra" value="18000" onchange="calculateAll()" style="font-weight: 600;">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Standard Allowance</label>
+                                <input type="number" class="form-input" id="standardAllowance" value="12000" onchange="calculateAll()" style="font-weight: 600;">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Performance Bonus</label>
+                                <input type="number" class="form-input" id="performanceBonus" value="15000" onchange="calculateAll()" style="font-weight: 600;">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Leave Travel Allowance (LTA)</label>
+                                <input type="number" class="form-input" id="lta" value="7500" onchange="calculateAll()" style="font-weight: 600;">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Fixed Allowance</label>
+                                <input type="number" class="form-input" id="fixedAllowance" value="7500" onchange="calculateAll()" style="font-weight: 600;">
+                            </div>
+                        </div>
+                        <div style="margin-top: 1rem; padding: 1rem; background: #0f1419; border: 1px solid #2d333b; border-radius: 8px;">
+                            <div style="font-weight: 600; margin-bottom: 0.5rem;">Gross Salary: <span id="grossSalaryDisplay" style="color: #3b82f6; font-size: 1.1rem;">₹105,000</span></div>
+                            <div style="color: #8b92a0; font-size: 0.9rem;">Sum of all salary components</div>
+                        </div>
+                    </div>
+                    
+                    <!-- SECTION 4: PROVIDENT FUND (PF) -->
+                    <div class="form-section" style="margin-bottom: 2rem;">
+                        <h3 class="form-section-title" style="font-size: 1.1rem; border-bottom: 1px solid #2d333b; padding-bottom: 0.75rem; margin-bottom: 1.5rem;">Provident Fund (PF)</h3>
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4 style="font-weight: 600; margin-bottom: 1rem; color: #e4e6eb;">Employee PF Contribution</h4>
+                            <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                                <div class="form-group">
+                                    <label class="form-label">Amount (₹ / month)</label>
+                                    <input type="number" class="form-input" id="employeePfAmount" value="5400" readonly style="background: #2d333b; font-weight: 600;">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Percentage (%)</label>
+                                    <input type="number" class="form-input" id="employeePfPercentage" value="12" onchange="calculatePfAmounts()" min="0" max="100">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 style="font-weight: 600; margin-bottom: 1rem; color: #e4e6eb;">Employer PF Contribution</h4>
+                            <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                                <div class="form-group">
+                                    <label class="form-label">Amount (₹ / month)</label>
+                                    <input type="number" class="form-input" id="employerPfAmount" value="5400" readonly style="background: #2d333b; font-weight: 600;">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Percentage (%)</label>
+                                    <input type="number" class="form-input" id="employerPfPercentage" value="12" onchange="calculatePfAmounts()" min="0" max="100">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- SECTION 5: TAX DEDUCTIONS -->
+                    <div class="form-section" style="margin-bottom: 2rem;">
+                        <h3 class="form-section-title" style="font-size: 1.1rem; border-bottom: 1px solid #2d333b; padding-bottom: 0.75rem; margin-bottom: 1.5rem;">Tax Deductions</h3>
+                        <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                            <div class="form-group">
+                                <label class="form-label">Professional Tax (₹ / month)</label>
+                                <input type="number" class="form-input" id="professionalTax" value="200" onchange="calculateAll()">
+                            </div>
+                        </div>
+                        <div style="margin-top: 1rem; padding: 1rem; background: #0f1419; border: 1px solid #2d333b; border-radius: 8px;">
+                            <div style="font-weight: 600; margin-bottom: 0.5rem;">Net Salary: <span id="netSalaryDisplay" style="color: #3b82f6; font-size: 1.1rem;">₹94,400</span></div>
+                            <div style="color: #8b92a0; font-size: 0.9rem;">Gross Salary - PF - Tax</div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="cancelChanges('salary')">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveChanges('salary')">Save Salary Info</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Tab -->
+        <div class="tab-content" id="securityTab">
+            <div class="tab-panel">
+                <div class="form-section">
+                    <h3 class="form-section-title">Change Password</h3>
+                    <div class="form-grid">
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label class="form-label">Current Password</label>
+                            <input type="password" class="form-input" id="currentPassword" placeholder="Enter current password">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">New Password</label>
+                            <input type="password" class="form-input" id="newPassword" placeholder="Enter new password" oninput="validatePassword()">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Confirm New Password</label>
+                            <input type="password" class="form-input" id="confirmPassword" placeholder="Confirm new password" oninput="validatePassword()">
+                        </div>
+                    </div>
+                    <div class="password-requirements">
+                        <div style="font-weight: 600; margin-bottom: 0.5rem;">Password Requirements:</div>
+                        <ul id="passwordRequirements">
+                            <li id="req-length">✓ At least 8 characters</li>
+                            <li id="req-uppercase">✓ One uppercase letter</li>
+                            <li id="req-lowercase">✓ One lowercase letter</li>
+                            <li id="req-number">✓ One number</li>
+                            <li id="req-special">✓ One special character</li>
+                            <li id="req-match">✓ Passwords match</li>
+                        </ul>
+                    </div>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: #0f1419; border: 1px solid #2d333b; border-radius: 8px;">
+                        <div style="color: #8b92a0; font-size: 0.9rem;">Last password update: <strong style="color: #e4e6eb;">November 15, 2024</strong></div>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="cancelChanges('security')">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveChanges('security')">Update Password</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
